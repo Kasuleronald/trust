@@ -240,6 +240,7 @@ ul {
 .sub-menu {
     position: absolute;
     left: 50%;
+    top: 50px;
     transform: translateX(-50%);
     width: 600px;
     background-color: var(--white);
@@ -255,7 +256,6 @@ ul {
     gap: 20px;
     justify-items: center;    /* Center columns horizontally */
     align-items: start;       /* Align columns to the top */
-
 }
 
 .sub-menu::before {
@@ -1051,18 +1051,23 @@ ul {
 /* Submenu Responsive Adjustments */
 @media (max-width: 1100px) {
     .sub-menu {
-        width: 90%;
-        left: 5%;
-        transform: translateX(0);
+        position: absolute;
+        top: 62px; /* Adjust based on header height */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        max-width: 90vw;
         grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
     }
     
     .sub-menu::before {
-        left: 50px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     .menu-item-has-children:hover .sub-menu {
-        transform: translateX(0) translateY(10px);
+        transform: translateX(-50%) translateY(0);
     }
 }
 
