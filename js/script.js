@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
-            if (window.innerWidth <= 767) {
+            if (window.innerWidth <= 768) {
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close submenus when clicking elsewhere
     document.addEventListener('click', function() {
-        if (window.innerWidth <= 767) {
+        if (window.innerWidth <= 768) {
             document.querySelectorAll('.menu-item-has-children').forEach(el => {
                 el.classList.remove('active');
                 el.querySelector('.sub-menu').style.display = 'none';
@@ -158,6 +158,171 @@ document.addEventListener('DOMContentLoaded', function() {
             origin: 'top'
         });
     }
+
+    // Quote Form Handling
+    const quoteForm = document.getElementById('quote-form');
+    const quoteSuccess = document.getElementById('quote-success');
+
+    if (quoteForm && quoteSuccess) {
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('quote-name').value;
+            const email = document.getElementById('quote-email').value;
+            const phone = document.getElementById('quote-phone').value;
+            const message = document.getElementById('quote-message').value || 'No additional notes';
+            const products = [];
+            
+            // Collect selected products and quantities
+            document.querySelectorAll('.product-item input[type="checkbox"]:checked').forEach(checkbox => {
+                const productName = checkbox.value;
+                const quantityInput = document.getElementById(`qty-${productName.toLowerCase().replace(/\s+/g, '-')}`);
+                const quantity = quantityInput ? quantityInput.value : 0;
+                if (quantity > 0) {
+                    products.push({ name: productName, quantity });
+                }
+            });
+
+            // Validate at least one product is selected with quantity
+            if (products.length === 0) {
+                alert('Please select at least one product with a quantity greater than 0.');
+                return;
+            }
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('message', message);
+            products.forEach(product => {
+                formData.append(`quantity[${product.name}]`, product.quantity);
+            });
+
+            // Send AJAX request
+            fetch('send_quote.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    quoteForm.style.display = 'none';
+                    quoteSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        quoteForm.reset();
+                        quoteForm.style.display = 'block';
+                        quoteSuccess.style.display = 'none';
+                    }, 5000);
+                } else {
+                    alert(data.message || 'Failed to send quote request.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sending the quote request.');
+            });
+        });
+
+        // Update quantity input when checkbox is toggled
+        document.querySelectorAll('.product-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const quantityInput = document.getElementById(`qty-${this.value.toLowerCase().replace(/\s+/g, '-')}`);
+                if (this.checked && quantityInput.value == 0) {
+                    quantityInput.value = 1;
+                } else if (!this.checked) {
+                    quantityInput.value = 0;
+                }
+            });
+        });
+    }
+
+    // Chat Form Handling
+    const chatForm = document.getElementById('chat-form');
+    const chatBody = document.querySelector('.chat-body');
+    const chatWindow = document.querySelector('.chat-window');
+    const chatButton = document.querySelector('.chat-button');
+
+    if (chatForm && chatBody && chatWindow) {
+        const chatSuccess = document.createElement('div');
+        chatSuccess.className = 'chat-success';
+        chatSuccess.innerHTML = `
+            <i class="fas fa-check-circle"></i>
+            <h4>Success!</h4>
+            <p>We'll get back to you soon.</p>
+        `;
+
+        // Add pulse animation every 4 seconds
+        setInterval(() => {
+            chatButton.classList.add('pulse');
+            setTimeout(() => {
+                chatButton.classList.remove('pulse');
+            }, 2000);
+        }, 4000);
+
+        chatButton.addEventListener('click', function() {
+            chatWindow.classList.toggle('active');
+            this.classList.remove('pulse');
+        });
+
+        const closeChat = document.querySelector('.close-chat');
+        if (closeChat) {
+            closeChat.addEventListener('click', function() {
+                chatWindow.classList.remove('active');
+            });
+        }
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('chat-name').value;
+            const email = document.getElementById('chat-email').value;
+            const phone = document.getElementById('chat-phone').value;
+            const message = document.getElementById('chat-message').value;
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('message', message);
+
+            // Send AJAX request
+            fetch('send_chat.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    chatBody.innerHTML = '';
+                    chatBody.appendChild(chatSuccess);
+                    chatSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        chatForm.reset();
+                        chatBody.innerHTML = '';
+                        chatBody.appendChild(chatForm);
+                        chatWindow.classList.remove('active');
+                    }, 3000);
+                } else {
+                    alert(data.message || 'Failed to send message.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sending the message.');
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.chat-widget') && !e.target.closest('.chat-button')) {
+                chatWindow.classList.remove('active');
+            }
+        });
+    }
 });
 
 // Back to Top Button
@@ -178,74 +343,5 @@ if (backToTop) {
             top: 0,
             behavior: 'smooth'
         });
-    });
-}
-
-// Chat Widget
-const chatButton = document.querySelector('.chat-button');
-const chatWindow = document.querySelector('.chat-window');
-const closeChat = document.querySelector('.close-chat');
-const chatForm = document.getElementById('chat-form');
-const chatBody = document.querySelector('.chat-body');
-
-if (chatButton && chatWindow && chatForm && chatBody) {
-    const chatSuccess = document.createElement('div');
-    chatSuccess.className = 'chat-success';
-    chatSuccess.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <h4>Message Sent!</h4>
-        <p>We'll get back to you soon.</p>
-    `;
-
-    // Add pulse animation every 10 seconds
-    setInterval(() => {
-        chatButton.classList.add('pulse');
-        setTimeout(() => {
-            chatButton.classList.remove('pulse');
-        }, 2000);
-    }, 10000);
-
-    chatButton.addEventListener('click', function() {
-        chatWindow.classList.toggle('active');
-        chatButton.classList.remove('pulse');
-    });
-
-    if (closeChat) {
-        closeChat.addEventListener('click', function() {
-            chatWindow.classList.remove('active');
-        });
-    }
-
-    chatForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('chat-name').value;
-        const email = document.getElementById('chat-email').value;
-        const phone = document.getElementById('chat-phone').value;
-        const message = document.getElementById('chat-message').value;
-        
-        // Here you would typically send the data to your server
-        console.log('Message submitted:', { name, email, phone, message });
-        
-        // Show success message
-        chatBody.innerHTML = '';
-        chatBody.appendChild(chatSuccess);
-        chatSuccess.style.display = 'block';
-        
-        // Reset form after 3 seconds
-        setTimeout(() => {
-            chatForm.reset();
-            chatBody.innerHTML = '';
-            chatBody.appendChild(chatForm);
-            chatWindow.classList.remove('active');
-        }, 3000);
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.chat-widget') && !e.target.closest('.chat-button')) {
-            chatWindow.classList.remove('active');
-        }
     });
 }
