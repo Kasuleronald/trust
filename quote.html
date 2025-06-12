@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote - Trust Construction Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/trust2.png" type="image/png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+   
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone-alt"></i> +250 788 843 505</li>
+                    <li><i class="fas fa-envelope"></i> richmu7@yahoo.fr</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Gisozi, Umukundo Center & Kicukiro, Sonatube at Chez John, KN 3 RD  Kigali - Rwanda</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/trust.png" alt="Trust Construction Company Logo">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Products</a>
+                        <ul class="sub-menu">
+                            <div class="sub-menu-column">
+                                <!-- Left Column Items -->
+                                <li><a href="bathroom-fixtures.html"><i class="fas fa-bath"></i> Bathroom Fixtures</a></li>
+                                <li><a href="flooring-solutions.html"><i class="fas fa-border-style"></i> Flooring Solutions</a></li>
+                                <li><a href="wall-panels.html"><i class="fas fa-th-large"></i> Wall Panels</a></li>
+                                <li><a href="smart-access.html"><i class="fas fa-door-open"></i> Smart Access Systems</a></li>
+                            </div>
+                            <div class="sub-menu-column">
+                                <!-- Right Column Items -->
+                                <li><a href="water-closet.html"><i class="fas fa-toilet"></i> Water Closet</a></li>
+                                <li><a href="spc-flooring.html"><i class="fas fa-vector-square"></i> SPC Flooring</a></li>
+                                <li><a href="wpc-decking.html"><i class="fas fa-tree"></i> WPC Decking</a></li>
+                                <li><a href="hotel-locks.html"><i class="fas fa-key"></i> Hotel Smart Locks</a></li>
+                            </div>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <a href="quote.html" class="btn btn-primary">Get a Quote</a>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quote Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="quote-content">
+                <div class="quote-title"  style="background-image: url('images/quote.webp'); background-position: center; background-size: cover; width: 100%; padding: 20px;">
+                    <h2>Get a Quote</h2>
+                    <p>Fill out the form below to request a quotation for our high-quality construction products. We'll get back to you promptly with a detailed quote.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="quote-form" class="quote-form" action="send_quote.php" method="POST">
+                        <div class="form-group">
+                            <label for="quote-name">Name *</label>
+                            <input type="text" id="quote-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-email">Email *</label>
+                            <input type="email" id="quote-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-phone">Phone</label>
+                            <input type="tel" id="quote-phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Products Needed *</label>
+                            <div class="product-selection">
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-water-closet" name="products" value="Water Closet">
+                                    <label for="product-water-closet">Water Closet</label>
+                                    <input type="number" min="0" value="0" id="qty-water-closet" name="quantity[Water Closet]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-shower" name="products" value="Shower">
+                                    <label for="product-shower">Shower</label>
+                                    <input type="number" min="0" value="0" id="qty-shower" name="quantity[Shower]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-bathtub" name="products" value="Bathtub">
+                                    <label for="product-bathtub">Bathtub</label>
+                                    <input type="number" min="0" value="0" id="qty-bathtub" name="quantity[Bathtub]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-sink-cabinet" name="products" value="Sink Cabinet">
+                                    <label for="product-sink-cabinet">Sink Cabinet</label>
+                                    <input type="number" min="0" value="0" id="qty-sink-cabinet" name="quantity[Sink Cabinet]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-spc-flooring" name="products" value="SPC Flooring">
+                                    <label for="product-spc-flooring">SPC Flooring</label>
+                                    <input type="number" min="0" value="0" id="qty-spc-flooring" name="quantity[SPC Flooring]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-wpc-decking" name="products" value="WPC Decking">
+                                    <label for="product-wpc-decking">WPC Decking</label>
+                                    <input type="number" min="0" value="0" id="qty-wpc-decking" name="quantity[WPC Decking]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-wall-panels" name="products" value="Wall Panels">
+                                    <label for="product-wall-panels">Wall Panels</label>
+                                    <input type="number" min="0" value="0" id="qty-wall-panels" name="quantity[Wall Panels]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-smart-gate" name="products" value="Smart Gate Operators">
+                                    <label for="product-smart-gate">Smart Gate Operators</label>
+                                    <input type="number" min="0" value="0" id="qty-smart-gate" name="quantity[Smart Gate Operators]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-hotel-smart-locks" name="products" value="Hotel Smart Locks">
+                                    <label for="product-hotel-smart-locks">Hotel Smart Locks</label>
+                                    <input type="number" min="0" value="0" id="qty-hotel-smart-locks" name="quantity[Hotel Smart Locks]" class="quantity-input">
+                                </div>
+                                <div class="product-item">
+                                    <input type="checkbox" id="product-carpet-tiles" name="products" value="Carpet Tiles">
+                                    <label for="product-carpet-tiles">Carpet Tiles</label>
+                                    <input type="number" min="0" value="0" id="qty-carpet-tiles" name="quantity[Carpet Tiles]" class="quantity-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-message">Additional Notes</label>
+                            <textarea id="quote-message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Request Quote</button>
+                    </form>
+                    <div id="quote-success" class="quote-success" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Quote Request Sent!</h4>
+                        <p>We'll get back to you soon with your quotation.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quote-info">
+                        <h3>Why Choose Us?</h3>
+                        <p>At Trust Construction Company, we provide high-quality construction products tailored to your needs. Request a quote today and benefit from:</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Premium quality materials</li>
+                            <li><i class="fas fa-check"></i> Competitive pricing</li>
+                            <li><i class="fas fa-check"></i> Expert advice and support</li>
+                            <li><i class="fas fa-check"></i> Timely delivery</li>
+                        </ul>
+                        <p>Contact us at <a href="tel:+250788843505">+250 788 843 505</a> or <a href="mailto:info@trustconstruction.rw">info@trustconstruction.rw</a> for more information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-widget about-widget">
+                            <div class="footer-logo">
+                                <img src="images/trust.png" alt="Trust Construction Company Logo">
+                            </div>
+                            <p>Trust Construction Company is a leading provider of high-quality construction products in Kigali, Rwanda.</p>
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/250788843505" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <div class="footer-widget links-widget">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="products.html">Products</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="footer-widget services-widget">
+                            <h3>Our Products</h3>
+                            <ul>
+                                <li><a href="water-closet.html">Water Closet</a></li>
+                                <li><a href="shower.html">Shower</a></li>
+                                <li><a href="bathtub.html">Bathtub</a></li>
+                                <li><a href="sink-cabinet.html">Sink Cabinet</a></li>
+                                <li><a href="spc-flooring.html">SPC Flooring</a></li>
+                                <li><a href="wpc-decking.html">WPC Decking</a></li>
+                                <li><a href="wall-panels.html">Wall Panels</a></li>
+                                <li><a href="smart-gate.html">Smart Gate Operators</a></li>
+                                <li><a href="smart-gate.html">Hotel Smart Locks</a></li>
+                                <li><a href="smart-gate.html">Carpet Tiles</a></li>
+                           </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="footer-widget contact-widget">
+                            <h3>Contact Us</h3>
+                            <ul class="footer-contact">
+                                <li><i class="fas fa-map-marker-alt"></i>Gisozi, Umukundo Center & Kicukiro, Sonatube at Chez John, KN 3 RD  Kigali - Rwanda</li>
+                                <li><i class="fas fa-phone-alt"></i> +250 788 843 505</li>
+                                <li><i class="fas fa-envelope"></i> richmu7@yahoo.fr</li>
+                                <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2025 Trust Construction Company. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="footer-menu">
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-button">
+            <i class="fas fa-comment"></i>
+        </div>
+        <div class="chat-window">
+            <div class="chat-header">
+                <h3>Chat with Us</h3>
+                <span class="close-chat"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="chat-body">
+                <form id="chat-form">
+                    <div class="form-group">
+                        <input type="text" id="chat-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="chat-email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="chat-phone" placeholder="Your Phone" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="chat-message" placeholder="Your Message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
